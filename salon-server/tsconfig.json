@@ -11,6 +11,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
+    "importsNotUsedAsValues": "remove",
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
