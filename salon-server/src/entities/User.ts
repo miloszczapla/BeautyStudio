@@ -1,6 +1,11 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 import { Field, ObjectType } from 'type-graphql';
 
+//treament is data of all user
+//User entity grapql + ORM
+//Field() - field is available in graphqp
+//PrimaryKey() - field is available in databas
+
 @ObjectType()
 @Entity()
 export class User {
@@ -25,25 +30,28 @@ export class User {
   name!: string;
 
   @Field()
-  @Property({ type: 'text' })
+  @Property({ type: 'text', nullable: true })
   surName!: string;
 
   @Property({ type: 'text' })
   password!: string;
 
+  //phone number to communicate in any case
   @Field()
   @Property({ type: 'text', unique: true })
   phone!: string;
 
+  //does client want to be notificated before visit
   @Field()
-  @Property({ type: 'boolean' })
+  @Property({ type: 'boolean', default: true })
   smsNotification!: boolean;
 
   @Field()
-  @Property({ type: 'boolean' })
+  @Property({ type: 'boolean', default: false })
   emailNotification!: boolean;
 
+  //keep URL to image file of the client
   @Field()
-  @Property({ type: 'bytea', unique: true })
-  userImage!: bytea;
+  @Property({ type: 'string', nullable: true })
+  userImage!: string;
 }

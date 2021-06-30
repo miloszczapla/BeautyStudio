@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const core_1 = require("@mikro-orm/core");
@@ -46,7 +45,7 @@ __decorate([
 ], User.prototype, "name", void 0);
 __decorate([
     type_graphql_1.Field(),
-    core_1.Property({ type: 'text' }),
+    core_1.Property({ type: 'text', nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "surName", void 0);
 __decorate([
@@ -60,18 +59,18 @@ __decorate([
 ], User.prototype, "phone", void 0);
 __decorate([
     type_graphql_1.Field(),
-    core_1.Property({ type: 'boolean' }),
+    core_1.Property({ type: 'boolean', default: true }),
     __metadata("design:type", Boolean)
 ], User.prototype, "smsNotification", void 0);
 __decorate([
     type_graphql_1.Field(),
-    core_1.Property({ type: 'boolean' }),
+    core_1.Property({ type: 'boolean', default: false }),
     __metadata("design:type", Boolean)
 ], User.prototype, "emailNotification", void 0);
 __decorate([
     type_graphql_1.Field(),
-    core_1.Property({ type: 'bytea', unique: true }),
-    __metadata("design:type", typeof (_a = typeof bytea !== "undefined" && bytea) === "function" ? _a : Object)
+    core_1.Property({ type: 'string', nullable: true }),
+    __metadata("design:type", String)
 ], User.prototype, "userImage", void 0);
 User = __decorate([
     type_graphql_1.ObjectType(),
