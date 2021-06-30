@@ -1,7 +1,7 @@
 import { PROD } from './constans';
 import { Treatment } from './entities/Treatment';
 import { MikroORM } from '@mikro-orm/core';
-import path from 'path/posix';
+import path from 'path';
 
 export default {
   migrations: {

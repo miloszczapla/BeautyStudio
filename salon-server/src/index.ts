@@ -5,6 +5,7 @@ import mikroORMConfig from './mikro-orm.config';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { HelloResolver } from './resolvers/hello';
+import path from 'path';
 
 const main = async () => {
   const orm = await MikroORM.init(mikroORMConfig);
