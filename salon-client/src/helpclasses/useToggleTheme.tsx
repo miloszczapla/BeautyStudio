@@ -10,6 +10,7 @@ const useToggleTheme = () => {
   //useEffect force rerender
   useEffect(() => {
     //grab html element
+
     const htmlElement = document.documentElement;
     //toggle class of html element, change theme of tailwindcss
     htmlElement.classList.toggle('dark');
