@@ -22,10 +22,6 @@ body {
   @apply top-full left-10 right-10 xs:right-12 xs:left-12 z-50  absolute rounded-3xl dark:bg-contrast-dark;
 }
 
-.toggle {
-  font-size: 40px;
-}
-
 .block-link {
   @apply flex flex-row justify-between  w-36 h-16 items-center px-1.5 bg-secondaryvariant rounded-md dark:bg-primarymain-dark shadow-main dark:shadow-dark transition duration-300;
 }

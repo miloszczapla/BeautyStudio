@@ -35,6 +35,7 @@ module.exports = {
       },
       white: colors.white,
       black: colors.black,
+      lightBulb: '#FEC100',
     },
     extend: {
       boxShadow: {

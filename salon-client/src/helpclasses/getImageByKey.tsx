@@ -4,8 +4,7 @@ const images = {
   hamburger: 'heroicons-solid:menu-alt-3',
   hairicon: '/assets/images/hairicon.svg',
   landingImg: '/assets/images/landingImg.png',
+  sun: 'heroicons-solid:sun',
+  moon: 'ph:moon-stars-fill',
 };
-// const getImageByKey = (key: string) => {
-//   return images[key];
-// };
 export default images;
