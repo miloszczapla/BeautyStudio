@@ -38,7 +38,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        Lato: ['Lato'],
+        body: ['Lato'],
       },
     },
   },

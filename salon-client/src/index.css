@@ -1,9 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
   @apply bg-secondarymain dark:bg-primaryvariant-dark text-black  dark:text-darktext;
+}
+
+.block-link {
+  @apply flex flex-row justify-between  w-36 h-16 items-center px-1 bg-secondaryvariant rounded-md dark:bg-primarymain-dark;
+  box-shadow: -1px 4px 10px rgba(62, 97, 91, 0.58);
+}
+.button-icon {
+  @apply bg-primarymain rounded-full w-9 h-9 justify-center items-center flex dark:bg-contrast-dark;
+  box-shadow: 0px 3.28889px 3.28889px rgba(0, 0, 0, 0.25);
 }
