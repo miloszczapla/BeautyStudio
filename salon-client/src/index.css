@@ -6,11 +6,30 @@ body {
   @apply bg-secondarymain dark:bg-primaryvariant-dark text-black  dark:text-darktext;
 }
 
+.svg-icon {
+  @apply dark:text-secondaryvariant-dark fill-current;
+}
+
+.section-links {
+  position: relative;
+  @apply mx-auto p-8 grid grid-cols-2 w-auto gap-7 justify-items-center max-w-xl xs:grid-cols-3;
+}
+
+.section-links::after {
+  content: '';
+  background-color: #5280787d;
+  height: 2px;
+  @apply top-full left-10 right-10 xs:right-12 xs:left-12 z-50  absolute rounded-3xl dark:bg-contrast-dark;
+}
+
+.toggle {
+  font-size: 40px;
+}
+
 .block-link {
-  @apply flex flex-row justify-between  w-36 h-16 items-center px-1 bg-secondaryvariant rounded-md dark:bg-primarymain-dark;
-  box-shadow: -1px 4px 10px rgba(62, 97, 91, 0.58);
+  @apply flex flex-row justify-between  w-36 h-16 items-center px-1.5 bg-secondaryvariant rounded-md dark:bg-primarymain-dark shadow-main dark:shadow-dark;
 }
 .button-icon {
-  @apply bg-primarymain rounded-full w-9 h-9 justify-center items-center flex dark:bg-contrast-dark;
+  @apply bg-primarymain rounded-full w-9 h-9 justify-center items-center flex dark:bg-contrast-dark text-2xl;
   box-shadow: 0px 3.28889px 3.28889px rgba(0, 0, 0, 0.25);
 }

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-// import icon from '../assets/offer.svg';
 
 interface Props {
   url: string;
@@ -9,16 +8,19 @@ interface Props {
 
 const ButtonBlock = ({ url, title, icon }: Props) => {
   return (
-    <Link to={url}>
-      <div className='block-link '>
-        <h3 className='pt-1 text-xl ml-1'>{title}</h3>
-        <div className='button-icon'>
-          <img
-            src={icon}
-            alt={`${title} icon`}
-            className='w-6 dark:text-secondaryvariant-dark fill-current'
-          />
-        </div>
+    <Link to={url} className='block-link'>
+      <h3 className='pt-1 text-xl ml-1'>{title}</h3>
+      <div className='button-icon'>
+        <span
+          data-inline='false'
+          data-icon={icon}
+          className='iconify svg-icon text-contrast'
+        ></span>
+        {/* <img
+          src={icon}
+          alt={`${title} icon`}
+          className='w-6 fill-current dark:text-secondaryvariant-dark '
+        /> */}
       </div>
     </Link>
   );

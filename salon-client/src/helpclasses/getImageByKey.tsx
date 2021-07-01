@@ -1,15 +1,10 @@
-import offer from '../assets/offer.svg';
-import signup from '../assets/signup.svg';
-import hairicon from '../assets/hairicon.svg';
-import hamburger from '../assets/hamburger.svg';
-
 const images = {
-  offer,
-  signup,
-  hamburger,
-  hairicon,
-} as any;
-const getImageByKey = (key: string) => {
-  return images[key];
+  offer: 'ic:twotone-local-offer',
+  signup: 'mdi:account-edit',
+  hamburger: 'heroicons-solid:menu-alt-3',
+  hairicon: '/assets/images/hairicon.svg',
 };
-export default getImageByKey;
+// const getImageByKey = (key: string) => {
+//   return images[key];
+// };
+export default images;

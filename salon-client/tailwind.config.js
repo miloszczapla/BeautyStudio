@@ -37,13 +37,22 @@ module.exports = {
       black: colors.black,
     },
     extend: {
+      boxShadow: {
+        main: '-1px 4px 10px rgba(62, 97, 91, 0.58)',
+        dark: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      },
+      screens: {
+        xs: '520px',
+      },
       fontFamily: {
         body: ['Lato'],
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      boxShadow: ['dark'],
+    },
   },
   plugins: [],
 };
