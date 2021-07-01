@@ -9,7 +9,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className='flex flex-row justify-between items-center p-2 bg-contrast  dark:bg-contrast-dark'>
+    <nav className='flex flex-row justify-between items-center p-2 bg-contrast  dark:bg-contrast-dark transition duration-300'>
       <img src={images.hairicon} alt='firma' className='pl-4 h-12' />
 
       <div className='toggle' onClick={handleClick}>

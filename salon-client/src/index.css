@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply bg-secondarymain dark:bg-primaryvariant-dark text-black  dark:text-darktext;
+  @apply bg-secondarymain dark:bg-primaryvariant-dark text-black  dark:text-darktext transition duration-300;
 }
 
 .svg-icon {
-  @apply dark:text-secondaryvariant-dark fill-current;
+  @apply dark:text-secondaryvariant-dark fill-current transition duration-300;
 }
 
 .section-links {
@@ -27,7 +27,7 @@ body {
 }
 
 .block-link {
-  @apply flex flex-row justify-between  w-36 h-16 items-center px-1.5 bg-secondaryvariant rounded-md dark:bg-primarymain-dark shadow-main dark:shadow-dark;
+  @apply flex flex-row justify-between  w-36 h-16 items-center px-1.5 bg-secondaryvariant rounded-md dark:bg-primarymain-dark shadow-main dark:shadow-dark transition duration-300;
 }
 .button-icon {
   @apply bg-primarymain rounded-full w-9 h-9 justify-center items-center flex dark:bg-contrast-dark text-2xl;
