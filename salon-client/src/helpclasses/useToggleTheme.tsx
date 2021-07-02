@@ -15,7 +15,7 @@ const useToggleTheme = () => {
     //toggle class of html element, change theme of tailwindcss
     htmlElement.classList.toggle('dark');
   }, [theme]);
-  return { toggle, theme };
+  return toggle;
 };
 
 export default useToggleTheme;

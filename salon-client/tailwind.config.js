@@ -54,6 +54,7 @@ module.exports = {
     extend: {
       boxShadow: ['dark'],
       brightness: ['dark'],
+      display: ['dark'],
     },
   },
   plugins: [],

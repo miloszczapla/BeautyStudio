@@ -6,7 +6,7 @@ const LinkSection = () => {
     <>
       <section className='section-links'>
         <ButtonBlock title='umów się' url='/' icon={images.signup} />
-        <ButtonBlock title='oferta' url='/' icon={images.offer} />
+        <ButtonBlock title='oferta' url='/offer' icon={images.offer} />
       </section>
       <div className='dividing-line'></div>
     </>
