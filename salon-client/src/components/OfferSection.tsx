@@ -42,7 +42,7 @@ const OfferSection = ({ sectionTitle, payloadArray }: Props) => {
         className={`  transition-all   ${isOpened ? 'mt-6' : 'delay-390'}`}
       >
         <Collapse isOpened={isOpened}>
-          <div className='bg-white mx-2 px-1  pb-2'>
+          <div className='dark:bg-primarymain-dark bg-white mx-2 px-1  pb-2'>
             {payloadArray.map((payload: Payload) => (
               <Service key={sectionTitle + payload.title} {...payload} />
             ))}

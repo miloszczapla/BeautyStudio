@@ -20,9 +20,12 @@ const Modal = ({ setModal, payload }: Props) => {
       ></article>
       <div className=' absolute left-1/2 z-50'>
         <div className=' relative -left-1/2 '>
-          <div className='modal-content bg-white shadow-main max-w-sm p-4 rounded-lg z-50'>
+          <div className='modal-content bg-white dark:bg-primarymain-dark shadow-main max-w-sm p-4 rounded-lg z-50'>
             <Label {...payload} />
-            <p className='text-black p-2 text-lg'> {payload.description}</p>
+            <p className='text-black dark:text-darktext p-2 text-lg'>
+              {' '}
+              {payload.description}
+            </p>
             <div className='flex justify-end p-2'>
               <ButtonBlocktel
                 url='tel:+48123456789'
