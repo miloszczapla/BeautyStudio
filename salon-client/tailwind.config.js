@@ -4,6 +4,7 @@ module.exports = {
   purge: [
     './class="lazy" data-src/**/*.{js,jsx,ts,tsx}',
     './public/index.html',
+    './src/**/*.tsx',
   ],
   darkMode: 'class',
   theme: {

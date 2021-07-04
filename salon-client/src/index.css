@@ -10,7 +10,7 @@
 
 @layer components {
   .svg-icon {
-    @apply dark:text-secondaryvariant-dark fill-current transition duration-300;
+    @apply dark:text-secondaryvariant-dark fill-current;
   }
 
   .section-links {
