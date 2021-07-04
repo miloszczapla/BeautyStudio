@@ -36,8 +36,15 @@ module.exports = {
       white: colors.white,
       black: colors.black,
       lightBulb: '#FEC100',
+      modal: {
+        DEFAULT: 'rgba(0, 0, 0, 0.35)',
+        dark: 'rgba(129, 129, 129, 0.39)',
+      },
     },
     extend: {
+      transitionDelay: {
+        390: '390ms',
+      },
       boxShadow: {
         main: '-1px 4px 10px rgba(62, 97, 91, 0.58)',
         dark: '0px 4px 4px rgba(0, 0, 0, 0.25)',
@@ -46,7 +53,7 @@ module.exports = {
         xs: '520px',
       },
       fontFamily: {
-        body: ['Lato'],
+        lato: "'Lato', sans-serif",
       },
     },
   },

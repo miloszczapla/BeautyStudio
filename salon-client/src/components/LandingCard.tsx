@@ -1,6 +1,7 @@
-import images from '../helpclasses/getImageByKey';
+import { images } from '../helpclasses/getImageByKey';
 
-const CardSection = () => {
+//Card on landing page that you see '/' path
+const LandingCard = () => {
   return (
     <article className='flex flex-col items-center p-6 filter dark:brightness-75 transition duration-300 '>
       <img src={images.landingImg} alt='landing' />
@@ -16,4 +17,4 @@ const CardSection = () => {
   );
 };
 
-export default CardSection;
+export default LandingCard;

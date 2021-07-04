@@ -2,12 +2,12 @@ import HomeButton from '../components/HomeButton';
 import OfferSection from '../components/OfferSection';
 import { Payload } from '../helpclasses/interfaces';
 
+interface Service {
+  section: string;
+  payload: Payload;
+}
 const Offer = () => {
-  interface Service {
-    section: string;
-    payload: Payload;
-  }
-
+  //TODO: fetch data from api
   const arrayOfOffers: Service[] = [
     {
       section: 'dermatologia',
@@ -46,21 +46,7 @@ const Offer = () => {
     },
   ];
 
-  //   interface Services {
-  //     [name: string]: Array<Payload>;
-  //   }
-  // const sections: Services = {};
-
-  // arrayOfOffers.forEach((service: Service) => {
-  //   if (sections.hasOwnProperty(service.section)) {
-  //     sections[service.section].push(service.payload);
-  //     const res = sections[service.section];
-  //     console.log('array item', res[1]);
-  //   } else {
-  //     sections[service.section] = [service.payload];
-  //   }
-  // });
-
+  // devide servises to sections
   const sections = new Map<string, Payload[]>();
 
   arrayOfOffers.forEach((service: Service) => {
@@ -73,14 +59,19 @@ const Offer = () => {
     }
   });
   return (
-    <main>
+    <>
       <HomeButton />
       <section className='flex items-center p-4 flex-col gap-4'>
+        {/* for each section create OfferSection component */}
         {Array.from(sections).map(([key, payloadArray]) => (
-          <OfferSection key={key} title={key} payloadArray={payloadArray} />
+          <OfferSection
+            key={key}
+            sectionTitle={key}
+            payloadArray={payloadArray}
+          />
         ))}
       </section>
-    </main>
+    </>
   );
 };
 

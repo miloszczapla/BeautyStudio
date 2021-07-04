@@ -1,12 +1,19 @@
 import ButtonBlock from './ButtonBlock';
-import images from '../helpclasses/getImageByKey';
+import { icons } from '../helpclasses/getImageByKey';
+import ButtonBlocktel from './ButtonBlocktel';
 
+//landing Page section of links
 const LinkSection = () => {
   return (
     <>
       <section className='section-links'>
-        <ButtonBlock title='umów się' url='/' icon={images.signup} />
-        <ButtonBlock title='oferta' url='/offer' icon={images.offer} />
+        <ButtonBlocktel
+          title='umów się'
+          url='
+        tel:+48123456789'
+          icon={icons.signup}
+        />
+        <ButtonBlock title='oferta' url='/offer' icon={icons.offer} />
       </section>
       <div className='dividing-line'></div>
     </>

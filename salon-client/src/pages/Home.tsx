@@ -1,12 +1,12 @@
-import CardSection from '../components/CardSection';
+import LandingCard from '../components/LandingCard';
 import LinkSection from '../components/LinkSection';
 
 const Home = () => {
   return (
-    <main>
+    <>
       <LinkSection />
-      <CardSection />
-    </main>
+      <LandingCard />
+    </>
   );
 };
 
