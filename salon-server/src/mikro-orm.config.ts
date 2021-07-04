@@ -4,6 +4,9 @@ import { MikroORM } from '@mikro-orm/core';
 import path from 'path';
 import { User } from './entities/User';
 
+//File containing db name, login, password
+import { db } from './sensitiveData';
+
 export default {
   migrations: {
     //migration config
@@ -15,8 +18,8 @@ export default {
   type: 'postgresql',
   //database tables
   entities: [Treatment, User],
-  dbName: 'salon',
-  user: 'milosz',
-  password: 'Dzikiryj45!',
+  dbName: db.dbName,
+  user: db.user,
+  password: db.password,
   debug: !PROD,
 } as Parameters<typeof MikroORM.init>[0]; //sets type of export and helps with autocomplection
