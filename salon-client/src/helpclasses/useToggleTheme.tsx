@@ -12,6 +12,7 @@ const useToggleTheme = () => {
   };
   //useEffect force rerender
   useEffect(() => {
+    let firstToggle = false;
     //grab html element
 
     const htmlElement = document.documentElement;
@@ -21,7 +22,7 @@ const useToggleTheme = () => {
       htmlElement.classList.toggle('dark');
     }
     setFirstToggle(false);
-  }, [theme]);
+  }, [theme, firstToggle]);
   return toggle;
 };
 
