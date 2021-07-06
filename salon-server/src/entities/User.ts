@@ -30,7 +30,7 @@ export class User {
   name!: string;
 
   @Field()
-  @Property({ type: 'text', nullable: true })
+  @Property({ type: 'text', default: '', nullable: true })
   surName!: string;
 
   @Property({ type: 'text' })
@@ -38,7 +38,7 @@ export class User {
 
   //phone number to communicate in any case
   @Field()
-  @Property({ type: 'text', unique: true })
+  @Property({ type: 'string', unique: true })
   phone!: string;
 
   //does client want to be notificated before visit
@@ -52,6 +52,6 @@ export class User {
 
   //keep URL to image file of the client
   @Field()
-  @Property({ type: 'string', nullable: true })
+  @Property({ type: 'string', default: '', nullable: true })
   userImage!: string;
 }

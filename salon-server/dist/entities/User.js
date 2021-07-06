@@ -45,7 +45,7 @@ __decorate([
 ], User.prototype, "name", void 0);
 __decorate([
     type_graphql_1.Field(),
-    core_1.Property({ type: 'text', nullable: true }),
+    core_1.Property({ type: 'text', default: '', nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "surName", void 0);
 __decorate([
@@ -54,7 +54,7 @@ __decorate([
 ], User.prototype, "password", void 0);
 __decorate([
     type_graphql_1.Field(),
-    core_1.Property({ type: 'text', unique: true }),
+    core_1.Property({ type: 'string', unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "phone", void 0);
 __decorate([
@@ -69,7 +69,7 @@ __decorate([
 ], User.prototype, "emailNotification", void 0);
 __decorate([
     type_graphql_1.Field(),
-    core_1.Property({ type: 'string', nullable: true }),
+    core_1.Property({ type: 'string', default: '', nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "userImage", void 0);
 User = __decorate([

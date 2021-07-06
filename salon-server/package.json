@@ -29,6 +29,7 @@
     "argon2": "^0.28.2",
     "class-validator": "^0.13.1",
     "email-validator": "^2.0.4",
+    "libphonenumber-js": "^1.9.21",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1"

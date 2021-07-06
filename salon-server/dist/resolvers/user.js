@@ -48,52 +48,197 @@ const type_graphql_1 = require("type-graphql");
 const argon2_1 = __importDefault(require("argon2"));
 const User_1 = require("../entities/User");
 const Emailvalidator = __importStar(require("email-validator"));
+const libphonenumber_js_1 = require("libphonenumber-js");
+let RegisterPassInput = class RegisterPassInput {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], RegisterPassInput.prototype, "email", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], RegisterPassInput.prototype, "password", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], RegisterPassInput.prototype, "name", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], RegisterPassInput.prototype, "phone", void 0);
+RegisterPassInput = __decorate([
+    type_graphql_1.InputType()
+], RegisterPassInput);
 let LoginPassInput = class LoginPassInput {
 };
 __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
-], LoginPassInput.prototype, "email", void 0);
+], LoginPassInput.prototype, "login", void 0);
 __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
 ], LoginPassInput.prototype, "password", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], LoginPassInput.prototype, "name", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], LoginPassInput.prototype, "phone", void 0);
 LoginPassInput = __decorate([
     type_graphql_1.InputType()
 ], LoginPassInput);
+let FieldError = class FieldError {
+};
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], FieldError.prototype, "field", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], FieldError.prototype, "message", void 0);
+FieldError = __decorate([
+    type_graphql_1.ObjectType()
+], FieldError);
+let UserResponce = class UserResponce {
+};
+__decorate([
+    type_graphql_1.Field(() => [FieldError], { nullable: true }),
+    __metadata("design:type", Array)
+], UserResponce.prototype, "errors", void 0);
+__decorate([
+    type_graphql_1.Field(() => User_1.User, { nullable: true }),
+    __metadata("design:type", User_1.User)
+], UserResponce.prototype, "user", void 0);
+UserResponce = __decorate([
+    type_graphql_1.ObjectType()
+], UserResponce);
 let UserResolver = class UserResolver {
     register(options, { em }) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (!Emailvalidator.validate(options.email)) {
+                return {
+                    errors: [
+                        {
+                            field: 'email',
+                            message: "email is invalid or doesn't exist, email jest nie poprawny albo nie istnieje",
+                        },
+                    ],
+                };
+            }
+            if (options.phone === '') {
+                return {
+                    errors: [
+                        {
+                            field: 'phone',
+                            message: "phone number doesn't exist, numer telefonu nie istnieje",
+                        },
+                    ],
+                };
+            }
+            try {
+                const phoneNumber = libphonenumber_js_1.parsePhoneNumber(options.phone);
+                if (phoneNumber.isValid()) {
+                    return {
+                        errors: [
+                            {
+                                field: 'phone',
+                                message: 'phone number is invalid, numer telefonu jest nie poprawny',
+                            },
+                        ],
+                    };
+                }
+            }
+            catch (error) {
+                return {
+                    errors: [
+                        {
+                            field: 'phone',
+                            message: 'phone number is invalid, numer telefonu jest nie poprawny',
+                        },
+                    ],
+                };
+            }
+            const re = new RegExp('(?=.{8,})(?=.*[a-z])');
+            if (!re.test(options.password)) {
+                return {
+                    errors: [
+                        {
+                            field: 'password',
+                            message: 'Password is too weak, password must be at least 8 characters long and contain at least 1 lowercase, hasło jest za słabe, powinno składać sięz 8 znaków i zawierać co najmniej 1 małą literę',
+                        },
+                    ],
+                };
+            }
             const hasedPassword = yield argon2_1.default.hash(options.password);
-            if (!Emailvalidator.validate(options.email))
-                throw new Error('e-mail jest nie prawidłowy,e-mail is invalid');
-            const user = em.create(User_1.User, {
-                email: options.email,
-                password: hasedPassword,
-                name: options.name,
-                phone: options.phone,
-            });
-            yield em.persistAndFlush(user);
-            return user;
+            let user;
+            try {
+                user = em.create(User_1.User, {
+                    email: options.email.toLowerCase(),
+                    password: hasedPassword,
+                    name: options.name,
+                    phone: options.phone,
+                });
+                yield em.persistAndFlush(user);
+            }
+            catch (err) {
+                if (err.code === '23505' || err.detail.includes('already exists')) {
+                    return {
+                        errors: [
+                            {
+                                field: 'overall',
+                                message: 'user already exists, użytkownik juz istnieje',
+                            },
+                        ],
+                    };
+                }
+            }
+            return { user };
+        });
+    }
+    login(options, { em }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let user = yield em.findOne(User_1.User, { email: options.login.toLowerCase() });
+            if (!user) {
+                user = yield em.findOne(User_1.User, { phone: options.login });
+            }
+            if (!user) {
+                return {
+                    errors: [
+                        {
+                            field: 'login',
+                            message: "login is invalid or doesn't exist, login jest nie poprawny albo uzytkownik nie istnieje",
+                        },
+                    ],
+                };
+            }
+            const validPass = yield argon2_1.default.verify(user.password, options.password);
+            if (!validPass) {
+                return {
+                    errors: [
+                        {
+                            field: 'password',
+                            message: 'incorrect password, hasło jest nie poprawne',
+                        },
+                    ],
+                };
+            }
+            return { user: user };
         });
     }
 };
 __decorate([
-    type_graphql_1.Mutation(() => User_1.User),
+    type_graphql_1.Mutation(() => UserResponce),
+    __param(0, type_graphql_1.Arg('options')),
+    __param(1, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [RegisterPassInput, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "register", null);
+__decorate([
+    type_graphql_1.Mutation(() => UserResponce),
     __param(0, type_graphql_1.Arg('options')),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [LoginPassInput, Object]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "register", null);
+], UserResolver.prototype, "login", null);
 UserResolver = __decorate([
     type_graphql_1.Resolver()
 ], UserResolver);
