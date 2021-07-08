@@ -6,13 +6,17 @@
   "scripts": {
     "watch": "tsc -w",
     "dev": "nodemon dist/index.js",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "create:migration": "mikro-orm migration:create"
   },
   "author": "Miłosz Czapla",
   "license": "MIT",
   "devDependencies": {
-    "@types/express": "^4.17.12",
+    "@types/connect-redis": "^0.0.17",
+    "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.4",
     "@types/node": "^15.12.5",
+    "@types/redis": "^2.8.30",
     "apollo-server-express": "^2.25.2",
     "express": "^4.17.1",
     "graphql": "^15.5.1",
@@ -25,8 +29,17 @@
     "@mikro-orm/core": "^4.5.6",
     "@mikro-orm/migrations": "^4.5.6",
     "@mikro-orm/postgresql": "^4.5.6",
+
+    "argon2": "^0.28.2",
     "class-validator": "^0.13.1",
+    "connect-redis": "^6.0.0",
+    "email-validator": "^2.0.4",
+    "express-session": "^1.17.2",
+    "libphonenumber-js": "^1.9.21",
+
     "pg": "^8.6.0",
+    "redis": "^3.1.2",
+    "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1"
   },
   "mikro-orm": {

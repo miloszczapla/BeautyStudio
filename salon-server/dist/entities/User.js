@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Treatment = void 0;
+exports.User = void 0;
 const core_1 = require("@mikro-orm/core");
 const type_graphql_1 = require("type-graphql");
-let Treatment = class Treatment {
+let User = class User {
     constructor() {
         this.createdAt = new Date();
         this.updatedAt = new Date();
@@ -22,25 +22,59 @@ __decorate([
     type_graphql_1.Field(),
     core_1.PrimaryKey(),
     __metadata("design:type", Number)
-], Treatment.prototype, "id", void 0);
+], User.prototype, "id", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     core_1.Property({ type: 'date' }),
     __metadata("design:type", Object)
-], Treatment.prototype, "createdAt", void 0);
+], User.prototype, "createdAt", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     core_1.Property({ type: 'date', onUpdate: () => new Date() }),
     __metadata("design:type", Object)
-], Treatment.prototype, "updatedAt", void 0);
+], User.prototype, "updatedAt", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'text', unique: true }),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
 __decorate([
     type_graphql_1.Field(),
     core_1.Property({ type: 'text' }),
     __metadata("design:type", String)
-], Treatment.prototype, "title", void 0);
-Treatment = __decorate([
+], User.prototype, "name", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'text', default: '', nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "surName", void 0);
+__decorate([
+    core_1.Property({ type: 'text' }),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'string', unique: true }),
+    __metadata("design:type", String)
+], User.prototype, "phone", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'boolean', default: true }),
+    __metadata("design:type", Boolean)
+], User.prototype, "smsNotification", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'boolean', default: false }),
+    __metadata("design:type", Boolean)
+], User.prototype, "emailNotification", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'string', default: '', nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "userImage", void 0);
+User = __decorate([
     type_graphql_1.ObjectType(),
     core_1.Entity()
-], Treatment);
-exports.Treatment = Treatment;
-//# sourceMappingURL=Treatment.js.map
+], User);
+exports.User = User;
+//# sourceMappingURL=User.js.map
