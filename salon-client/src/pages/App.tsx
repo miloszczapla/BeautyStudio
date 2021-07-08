@@ -1,18 +1,25 @@
+import { Switch, Route } from 'react-router-dom';
+import NavBar from '../components/NavBar';
+import ThemeToggler from '../components/ThemeToggler';
+import Home from './Home';
+import Offer from './Offer';
+
 function App() {
   return (
-    <div className='App font-Lato'>
-      <header className='App-header'>
-        <p className=' text-blue-700'>Hello World</p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar />
+      <ThemeToggler />
+      <main>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route path='/offer'>
+            <Offer />
+          </Route>
+        </Switch>
+      </main>
+    </>
   );
 }
 
