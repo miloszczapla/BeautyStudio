@@ -110,7 +110,17 @@ UserResponce = __decorate([
     type_graphql_1.ObjectType()
 ], UserResponce);
 let UserResolver = class UserResolver {
-    register(options, { em }) {
+    me({ req, em }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = req.session.userId;
+            if (!id) {
+                return null;
+            }
+            const user = yield em.findOne(User_1.User, id);
+            return user;
+        });
+    }
+    register(options, { em, req }) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!Emailvalidator.validate(options.email)) {
                 return {
@@ -167,14 +177,13 @@ let UserResolver = class UserResolver {
                 };
             }
             const hasedPassword = yield argon2_1.default.hash(options.password);
-            let user;
+            const user = em.create(User_1.User, {
+                email: options.email.toLowerCase(),
+                password: hasedPassword,
+                name: options.name,
+                phone: options.phone,
+            });
             try {
-                user = em.create(User_1.User, {
-                    email: options.email.toLowerCase(),
-                    password: hasedPassword,
-                    name: options.name,
-                    phone: options.phone,
-                });
                 yield em.persistAndFlush(user);
             }
             catch (err) {
@@ -189,10 +198,11 @@ let UserResolver = class UserResolver {
                     };
                 }
             }
+            req.session.userId = user.id;
             return { user };
         });
     }
-    login(options, { em }) {
+    login(options, { em, req }) {
         return __awaiter(this, void 0, void 0, function* () {
             let user = yield em.findOne(User_1.User, { email: options.login.toLowerCase() });
             if (!user) {
@@ -219,10 +229,18 @@ let UserResolver = class UserResolver {
                     ],
                 };
             }
-            return { user: user };
+            req.session.userId = user.id;
+            return { user };
         });
     }
 };
+__decorate([
+    type_graphql_1.Query(() => User_1.User, { nullable: true }),
+    __param(0, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "me", null);
 __decorate([
     type_graphql_1.Mutation(() => UserResponce),
     __param(0, type_graphql_1.Arg('options')),

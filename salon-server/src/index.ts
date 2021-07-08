@@ -1,12 +1,16 @@
 import 'reflect-metadata';
 import express from 'express';
 import { MikroORM } from '@mikro-orm/core';
-import { PORT } from './constans';
+import { PORT, PROD } from './constans';
 import mikroORMConfig from './mikro-orm.config';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { TreatmentResolver } from './resolvers/treatment';
 import { UserResolver } from './resolvers/user';
+import session from 'express-session';
+import redis from 'redis';
+import connectRedis from 'connect-redis';
+import { MyContex } from './types';
 
 //everything in async functions to catch errors and give ability to use await key word
 const main = async () => {
@@ -18,6 +22,30 @@ const main = async () => {
   //express framework raise
   const app = express();
 
+  //Create redis instance
+  const RedisStore = connectRedis(session);
+  const redisClient = redis.createClient();
+
+  //Add session to redis and cookie
+  app.use(
+    session({
+      name: 'qid',
+      store: new RedisStore({
+        client: redisClient,
+        ttl: 60 * 60 * 24 * 4, // 4 days
+      }),
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: PROD, // cookie only works in production
+      },
+      saveUninitialized: false,
+      secret: 'ewqrwetewqrweqrtqwer',
+      resave: false,
+    })
+  );
+
   //apolloserver for grapql start and config
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
@@ -26,7 +54,7 @@ const main = async () => {
       validate: false,
     }),
     //passing contex
-    context: () => ({ em: orm.em }),
+    context: ({ req, res }): MyContex => ({ em: orm.em, req, res }),
   });
 
   //adding apolloserver to express app

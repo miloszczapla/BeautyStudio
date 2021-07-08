@@ -6,6 +6,7 @@ import {
   InputType,
   Mutation,
   ObjectType,
+  Query,
   Resolver,
 } from 'type-graphql';
 import argon2 from 'argon2';
@@ -57,11 +58,21 @@ class UserResponce {
 
 @Resolver()
 export class UserResolver {
+  @Query(() => User, { nullable: true })
+  async me(@Ctx() { req, em }: MyContex) {
+    const id = req.session.userId;
+    if (!id) {
+      return null;
+    }
+    const user = await em.findOne(User, id);
+    return user;
+  }
+
   //registing user by email and password with is hased to store
   @Mutation(() => UserResponce)
   async register(
     @Arg('options') options: RegisterPassInput,
-    @Ctx() { em }: MyContex
+    @Ctx() { em, req }: MyContex
   ): Promise<UserResponce> {
     //Email validation
     if (!Emailvalidator.validate(options.email)) {
@@ -132,15 +143,15 @@ export class UserResolver {
     //email validation
 
     // Creating User
-    let user;
+    // let user: User | null = null;
     //make sure that user duplicate are handled
+    const user = em.create(User, {
+      email: options.email.toLowerCase(),
+      password: hasedPassword,
+      name: options.name,
+      phone: options.phone,
+    });
     try {
-      user = em.create(User, {
-        email: options.email.toLowerCase(),
-        password: hasedPassword,
-        name: options.name,
-        phone: options.phone,
-      });
       //adding user to database
       await em.persistAndFlush(user);
     } catch (err: any) {
@@ -156,13 +167,17 @@ export class UserResolver {
         };
       }
     }
+
+    //setting the session so we are also logged in automaticly after registration
+    req.session.userId = user.id;
+
     return { user };
   }
 
   @Mutation(() => UserResponce)
   async login(
     @Arg('options') options: LoginPassInput,
-    @Ctx() { em }: MyContex
+    @Ctx() { em, req }: MyContex
   ): Promise<UserResponce> {
     let user = await em.findOne(User, { email: options.login.toLowerCase() });
     if (!user) {
@@ -192,6 +207,10 @@ export class UserResolver {
         ],
       };
     }
-    return { user: user };
+
+    //setting the cookie to have your own session and be loged in after come back to the site
+    req.session.userId = user.id;
+
+    return { user };
   }
 }
