@@ -26,7 +26,7 @@
   }
 
   .block-link {
-    @apply flex flex-row justify-between  w-36 h-16 items-center px-1.5 bg-secondaryvariant rounded-lg dark:bg-primarymain-dark shadow-main dark:shadow-dark transition duration-300;
+    @apply cursor-pointer flex flex-row justify-between  w-36 h-16 items-center px-1.5 bg-secondaryvariant rounded-lg dark:bg-primarymain-dark shadow-main dark:shadow-dark  hover:shadow-lifghtBlue transition duration-300;
   }
   .button-icon {
     @apply bg-primarymain rounded-full w-9 h-9 justify-center items-center flex dark:bg-contrast-dark text-2xl;
@@ -45,4 +45,16 @@
   .modal-content {
     width: 90vw;
   }
+
+  .submit-btn {
+    @apply flex items-center justify-center bg-primaryvariant rounded-lg w-4/5 h-16 text-3xl text-white mx-auto;
+  }
+}
+
+.first-letter-capitalize::first-letter {
+  text-transform: capitalize;
+}
+
+.scale-bigger {
+  transform: scale(1.5);
 }

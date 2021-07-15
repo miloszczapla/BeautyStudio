@@ -9,6 +9,7 @@ export const images = {
 
 export const icons = {
   hairicon,
+  account: 'mdi:account',
   offer: 'ic:twotone-local-offer',
   signup: 'mdi:account-edit',
   hamburger: 'heroicons-solid:menu-alt-3',

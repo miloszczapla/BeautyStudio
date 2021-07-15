@@ -11,7 +11,7 @@ interface Props {
 const ButtonBlock = ({ url, title, icon }: Props) => {
   return (
     <Link href={url}>
-      <div className='block-link'>
+      <div className='block-link '>
         <h3 className='pt-1 text-xl ml-1'>{title}</h3>
         {/* iconify icon  */}
         <div className='button-icon'>

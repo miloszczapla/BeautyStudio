@@ -34,9 +34,13 @@ module.exports = {
       darktext: {
         DEFAULT: '#408B9B',
       },
+      error: {
+        DEFAULT: '#D65C5C',
+      },
       white: colors.white,
       black: colors.black,
       lightBulb: '#FEC100',
+
       modal: {
         DEFAULT: 'rgba(0, 0, 0, 0.35)',
         dark: 'rgba(129, 129, 129, 0.39)',
@@ -49,6 +53,7 @@ module.exports = {
       boxShadow: {
         main: '-1px 4px 10px rgba(62, 97, 91, 0.58)',
         dark: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        lifghtBlue: '-6px 10px 4px #53BFD2',
       },
       screens: {
         xs: '520px',
@@ -63,6 +68,8 @@ module.exports = {
       boxShadow: ['dark'],
       brightness: ['dark'],
       display: ['dark'],
+      backgroundBlendMode: ['hover'],
+      borderWidth: ['focus'],
     },
   },
   plugins: [],
