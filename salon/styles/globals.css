@@ -47,7 +47,7 @@
   }
 
   .submit-btn {
-    @apply flex items-center justify-center bg-primaryvariant rounded-lg w-4/5 h-16 text-3xl text-white mx-auto;
+    @apply flex items-center justify-center bg-primaryvariant rounded-lg w-4/5 h-16 text-3xl text-white mx-auto dark:bg-secondaryvariant-dark dark:text-contrast;
   }
 }
 

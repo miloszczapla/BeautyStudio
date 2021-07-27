@@ -19,12 +19,12 @@ const FormikCheckBoxFiled = ({ name, formProps, content }: Props) => {
         <Field
           name={name}
           type='checkbox'
-          className={`scale-bigger px-2 focus:outline-none   ${getStyles(
+          className={`scale-bigger px-2   focus:outline-none  ${getStyles(
             formProps.errors,
             name
-          )}`}
+          )} `}
         />
-        <p className={`${getStyles(formProps.errors, name)} border-0`}>
+        <p className={`${getStyles(formProps.errors, name)} border-0 `}>
           {content}
           <br />
           <br />

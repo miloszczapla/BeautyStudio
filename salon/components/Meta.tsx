@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 
 const Meta = ({
   title = 'AM Dermatrychologia',
@@ -51,7 +52,7 @@ const Meta = ({
       <meta name='msapplication-TileColor' content='#53bfd2' />
       <meta name='theme-color' content='#53bfd2' />
 
-      <script src='https://code.iconify.design/1/1.0.6/iconify.min.js'></script>
+      <Script src='https://code.iconify.design/1/1.0.6/iconify.min.js'></Script>
     </Head>
   );
 };

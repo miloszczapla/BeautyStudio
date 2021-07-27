@@ -1,9 +1,12 @@
 //keep easy access to images path
 import landingImg from '../assets/landingImg.png';
+import Loading from '../assets/LOADING.png';
+
 import hairicon from '../assets/hairicon.svg';
 
 export const images = {
   landingImg,
+  Loading,
 };
 //keep easy access to icons path/name
 

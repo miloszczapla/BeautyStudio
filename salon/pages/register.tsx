@@ -6,6 +6,9 @@ import FormikField from '../components/FormikField';
 import 'react-phone-number-input/style.css';
 import 'Yup-phone';
 import FormikCheckBoxFiled from '../components/FormikCheckBoxFiled';
+import HomeButton from '../components/HomeButton';
+import SpiningImg from '../components/SpiningImg';
+import LOADING from '../assets/LOADING.png';
 // import PhoneInput from 'react-phone-number-input';
 // import PhoneInputField from './PhoneNumField';
 
@@ -14,6 +17,7 @@ const register = () => {
     console.log(values);
   };
 
+  //placeholder for agreedments
   const checkBoxContent = {
     policyAgreadment:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae sapien at velit at pellentesque bibendum neque, suspendisse at.',
@@ -23,6 +27,8 @@ const register = () => {
 
   return (
     <Wrapper>
+      <HomeButton />
+
       <Formik
         initialValues={{
           username: '',
@@ -35,6 +41,7 @@ const register = () => {
         onSubmit={(values) => {
           handleSubmit(values);
         }}
+        //validation on fields
         validationSchema={Yup.object({
           username: Yup.string()
             .required('pole wymagane')
@@ -49,9 +56,7 @@ const register = () => {
           email: Yup.string()
             .required('pole wymagane')
             .email('email jest nieprawidłowy'),
-          phone: Yup.string()
-            .required('pole wymagane')
-            .phone(undefined, undefined, 'niewłaściwy numer telefonu'),
+          phone: Yup.string().required('pole wymagane'),
           policyAgreadment: Yup.bool().isTrue('Zgoda jest wymagana'),
         })}
         render={(formProps) => {
@@ -59,26 +64,29 @@ const register = () => {
             <Form className=' flex flex-col gap-5 text-xs'>
               <FormikField
                 name='username'
-                type='text'
-                placeholder='imię'
+                label='Imię'
+                placeholder='Magda'
                 formProps={formProps}
               />
               <FormikField
                 name='email'
+                label='Email'
                 type='email'
-                placeholder='email'
+                placeholder='imię@poczta.com'
                 formProps={formProps}
               />
               <FormikField
                 name='password'
+                label='Hasło'
                 type='password'
-                placeholder='hasło'
+                placeholder='*****'
                 formProps={formProps}
               />
               <FormikField
                 name='phone'
+                label='Numer telefonu'
                 type='tel'
-                placeholder='+48123456789'
+                placeholder='123456789'
                 formProps={formProps}
               />
               <FormikCheckBoxFiled
@@ -91,18 +99,17 @@ const register = () => {
                 content={checkBoxContent.advertismentAgreadment}
                 formProps={formProps}
               />
-
               <button type='submit' className='submit-btn'>
-                Zartejestruj się
+                {formProps.isSubmitting ? (
+                  <SpiningImg LOADING={LOADING} size={14} />
+                ) : (
+                  'Zarejestruj się'
+                )}
               </button>
             </Form>
           );
         }}
-      >
-        {/* {() => (
-          
-        )} */}
-      </Formik>
+      ></Formik>
     </Wrapper>
   );
 };
