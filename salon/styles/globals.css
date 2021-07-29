@@ -22,7 +22,7 @@
     content: '';
     background-color: #5280787d;
     height: 2px;
-    @apply top-full left-10 right-10 xs:right-12 xs:left-12 z-50  absolute rounded-3xl dark:bg-contrast-dark;
+    @apply top-full left-10 right-10 xs:right-12 xs:left-12 z-10  absolute rounded-3xl dark:bg-contrast-dark;
   }
 
   .block-link {

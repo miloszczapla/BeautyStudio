@@ -5,7 +5,7 @@ interface Props {
   name: string;
   type?: string;
   placeholder: string;
-  label: string;
+  label?: string;
   formProps: any;
 }
 
@@ -23,12 +23,15 @@ const FormikField = ({
   }
   return (
     <div className='my-2 flex flex-col gap-1'>
-      <label
-        htmlFor={name}
-        className='text-black first-letter-capitalize dark:text-white text-xl'
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={name}
+          className='text-black first-letter-capitalize dark:text-white text-xl'
+        >
+          {label}
+        </label>
+      )}
+
       <Field
         id={name}
         name={name}

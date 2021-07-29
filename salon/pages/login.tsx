@@ -15,7 +15,7 @@ import { useLoginMutation } from '../generated/graphql';
 const Login = () => {
   const router = useRouter();
 
-  const [login, { data }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
   return (
     <Wrapper>
