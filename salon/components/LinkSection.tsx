@@ -14,7 +14,7 @@ const LinkSection = () => {
           icon={icons.signup}
         />
         <ButtonBlock title='oferta' url='/offer' icon={icons.offer} />
-        <ButtonBlock title='konto' url='/register' icon={icons.account} />
+        <ButtonBlock title='konto' url='/login' icon={icons.account} />
       </section>
       <div className='dividing-line'></div>
     </>

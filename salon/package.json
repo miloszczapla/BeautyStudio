@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
@@ -16,12 +17,15 @@
     "react": "17.0.2",
     "react-collapse": "^5.1.0",
     "react-dom": "17.0.2",
+    "react-phone-number-input": "^3.1.25",
     "yup": "^0.32.9",
     "yup-phone": "^1.2.19"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.8",
     "@types/react": "17.0.14",
     "@types/react-collapse": "^5.0.1",
+    "@types/react-phone-number-input": "^3.0.10",
     "autoprefixer": "^10.2.6",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
@@ -29,6 +33,9 @@
     "npm": "^7.19.1",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4",
-    "typescript": "4.3.5"
+    "typescript": "4.3.5",
+    "@graphql-codegen/typescript-react-apollo": "2.3.1",
+    "@graphql-codegen/typescript-operations": "1.18.4",
+    "@graphql-codegen/typescript": "1.23.0"
   }
 }

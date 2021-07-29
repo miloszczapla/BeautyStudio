@@ -12,7 +12,7 @@ import session from 'express-session';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
 import { MyContex } from './types';
-
+import cors from 'cors';
 
 //everything in async functions to catch errors and give ability to use await key word
 const main = async () => {
@@ -27,6 +27,13 @@ const main = async () => {
   //Create redis instance
   const RedisStore = connectRedis(session);
   const redisClient = redis.createClient();
+
+  app.use(
+    cors({
+      origin: 'http://localhost:3000',
+      credentials: true,
+    })
+  );
 
   //Add session to redis and cookie
   app.use(
@@ -60,7 +67,7 @@ const main = async () => {
   });
 
   //adding apolloserver to express app
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: false });
 
   //homepage
   app.get('/', (_, res) => {

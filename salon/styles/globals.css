@@ -58,3 +58,11 @@
 .scale-bigger {
   transform: scale(1.5);
 }
+
+.sentence-with-link::first-letter {
+  text-transform: capitalize;
+}
+
+.sentence-with-link {
+  @apply my-3;
+}

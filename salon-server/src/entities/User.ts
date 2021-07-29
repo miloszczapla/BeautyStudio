@@ -54,4 +54,20 @@ export class User {
   @Field()
   @Property({ type: 'string', default: '', nullable: true })
   userImage!: string;
+
+  @Field()
+  @Property({ type: 'string', default: false })
+  policyAgreement!: boolean;
+
+  @Field()
+  @Property({ type: 'string', default: false })
+  advertisingAgreement!: boolean;
+
+  @Field()
+  @Property({ type: 'text', default: '' })
+  note!: string;
+
+  @Field()
+  @Property({ type: 'text', default: '' })
+  specialistNote!: string;
 }

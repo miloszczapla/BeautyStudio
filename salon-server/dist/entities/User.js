@@ -72,6 +72,26 @@ __decorate([
     core_1.Property({ type: 'string', default: '', nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "userImage", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'string', default: false }),
+    __metadata("design:type", Boolean)
+], User.prototype, "policyAgreement", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'string', default: false }),
+    __metadata("design:type", Boolean)
+], User.prototype, "advertisingAgreement", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'text', default: '' }),
+    __metadata("design:type", String)
+], User.prototype, "note", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'text', default: '' }),
+    __metadata("design:type", String)
+], User.prototype, "specialistNote", void 0);
 User = __decorate([
     type_graphql_1.ObjectType(),
     core_1.Entity()

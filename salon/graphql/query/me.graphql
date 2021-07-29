@@ -1,0 +1,12 @@
+query Me {
+  me {
+    phone
+    email
+    name
+    surName
+    smsNotification
+    emailNotification
+    userImage
+    note
+  }
+}

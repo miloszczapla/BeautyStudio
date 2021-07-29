@@ -1,0 +1,35 @@
+mutation Register(
+  $name: String!
+  $password: String!
+  $email: String!
+  $phone: String!
+  $policyAgreement: Boolean!
+  $advertisingAgreement: Boolean!
+) {
+  register(
+    options: {
+      email: $email
+      password: $password
+      name: $name
+      phone: $phone
+      policyAgreement: $policyAgreement
+      advertisingAgreement: $advertisingAgreement
+    }
+  ) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      createdAt
+      updatedAt
+      email
+      name
+      surName
+      phone
+      smsNotification
+      userImage
+    }
+  }
+}

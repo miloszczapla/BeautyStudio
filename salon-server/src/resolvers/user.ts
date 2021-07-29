@@ -26,8 +26,11 @@ class RegisterPassInput {
   name!: string;
   @Field()
   phone!: string;
+  @Field()
+  policyAgreement!: boolean;
+  @Field()
+  advertisingAgreement!: boolean;
 }
-
 //type of args passing when loging
 @InputType()
 class LoginPassInput {
@@ -80,8 +83,7 @@ export class UserResolver {
         errors: [
           {
             field: 'email',
-            message:
-              "email is invalid or doesn't exist, email jest nie poprawny albo nie istnieje",
+            message: 'email jest nie poprawny albo nie istnieje',
           },
         ],
       };
@@ -94,7 +96,7 @@ export class UserResolver {
         errors: [
           {
             field: 'phone',
-            message: "phone number doesn't exist, numer telefonu nie istnieje",
+            message: 'numer telefonu nie istnieje',
           },
         ],
       };
@@ -103,13 +105,12 @@ export class UserResolver {
     //Phone Number validation
     try {
       const phoneNumber = parsePhoneNumber(options.phone);
-      if (phoneNumber.isValid()) {
+      if (!phoneNumber.isValid()) {
         return {
           errors: [
             {
               field: 'phone',
-              message:
-                'phone number is invalid, numer telefonu jest nie poprawny',
+              message: 'numer telefonu jest nie poprawny',
             },
           ],
         };
@@ -119,8 +120,7 @@ export class UserResolver {
         errors: [
           {
             field: 'phone',
-            message:
-              'phone number is invalid, numer telefonu jest nie poprawny',
+            message: 'numer telefonu jest nie poprawny',
           },
         ],
       };
@@ -133,7 +133,18 @@ export class UserResolver {
           {
             field: 'password',
             message:
-              'Password is too weak, password must be at least 8 characters long and contain at least 1 lowercase, hasło jest za słabe, powinno składać sięz 8 znaków i zawierać co najmniej 1 małą literę',
+              'hasło powinno składać się z 8 znaków i zawierać co najmniej 1 małą literę',
+          },
+        ],
+      };
+    }
+    // check if policy agreedment is equal to true
+    if (options.policyAgreement !== true) {
+      return {
+        errors: [
+          {
+            field: 'policyAgreement',
+            message: 'Zgoda na warunki przetważania danych jest niezbędna',
           },
         ],
       };
@@ -150,6 +161,8 @@ export class UserResolver {
       password: hasedPassword,
       name: options.name,
       phone: options.phone,
+      policyAgreement: options.policyAgreement,
+      advertisingAgreement: options.advertisingAgreement,
     });
     try {
       //adding user to database
@@ -160,8 +173,12 @@ export class UserResolver {
         return {
           errors: [
             {
-              field: 'overall',
-              message: 'user already exists, użytkownik juz istnieje',
+              field: 'email',
+              message: 'użytkownik juz istnieje',
+            },
+            {
+              field: 'phone',
+              message: 'użytkownik juz istnieje',
             },
           ],
         };
@@ -189,8 +206,7 @@ export class UserResolver {
         errors: [
           {
             field: 'login',
-            message:
-              "login is invalid or doesn't exist, login jest nie poprawny albo uzytkownik nie istnieje",
+            message: 'login jest nie poprawny albo uzytkownik nie istnieje',
           },
         ],
       };
@@ -202,7 +218,7 @@ export class UserResolver {
         errors: [
           {
             field: 'password',
-            message: 'incorrect password, hasło jest nie poprawne',
+            message: 'hasło jest nie poprawne',
           },
         ],
       };
