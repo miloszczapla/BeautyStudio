@@ -3,7 +3,6 @@ import { Form, Formik } from 'formik';
 import Wrapper from '../components/Wrapper';
 import * as Yup from 'yup';
 import FormikField from '../components/FormikField';
-import 'Yup-phone';
 import FormikCheckBoxFiled from '../components/FormikCheckBoxFiled';
 import HomeButton from '../components/HomeButton';
 import SpiningImg from '../components/SpiningImg';
