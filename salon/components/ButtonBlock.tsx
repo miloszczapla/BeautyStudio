@@ -10,7 +10,7 @@ interface Props {
 //Blockto navigete to name features of the website, displayed on landing page
 const ButtonBlock = ({ url, title, icon }: Props) => {
   return (
-    <Link href={url}>
+    <Link href={url} passHref>
       <div className='block-link '>
         <h3 className='pt-1 text-xl ml-1'>{title}</h3>
         {/* iconify icon  */}

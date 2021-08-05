@@ -48,7 +48,7 @@ const Logged = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [me]);
+  }, [me, data]);
   // useEffect(async () => {
   //  const response = await me
   // }, [])
