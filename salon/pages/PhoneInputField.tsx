@@ -8,26 +8,26 @@ const PhoneInputField = (props: any) => {
   const {
     className,
     field: { name, value },
-    form: { errors, handleBlur, setFieldValue, touched },
-    form,
+    form: { errors, setFieldValue, touched },
+    // form,
     label,
     country,
     onChange,
     disabled,
   } = props;
 
-  const [isFocused, setFocused] = useState(false);
+  const [isFocused, _] = useState(false);
   const isError = getIn(touched, name) && getIn(errors, name);
   const errorStyle = isError ? 'error' : '';
   const filledStyle = isFocused || value ? 'filled' : '';
   const disabledStyle = disabled ? 'disabled' : '';
 
-  const handleInputBlur = (e: any) => {
-    setFocused(false);
-    handleBlur(e);
-  };
+  // const handleInputBlur = (e: any) => {
+  //   setFocused(false);
+  //   handleBlur(e);
+  // };
 
-  const handleInputFocus = () => setFocused(true);
+  // const handleInputFocus = () => setFocused(true);
 
   const onValueChange = (phoneNumber: any) => {
     setFieldValue(name, phoneNumber);
