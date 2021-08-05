@@ -9,6 +9,15 @@ const NavBar = () => {
   const [isDrawer, setIsDrawer] = useState(false);
   const navRef = useRef(null);
 
+  const links = (
+    <>
+      <NavBlock path='/login'>konto</NavBlock>
+      <NavBlock path='/offer'>oferta</NavBlock>
+      <NavBlock path='tel:+48123456789'>umów się</NavBlock>
+      <NavBlock path='/'>Home</NavBlock>
+    </>
+  );
+
   const handleClick = (e: any) => {
     //@ts-ignore
     if (navRef.current && !navRef?.current.contains(e.target)) {
@@ -46,19 +55,9 @@ const NavBar = () => {
           data-icon={icons.hamburger}
         ></span>
       </button>
-      <Drawer isDrawer={isDrawer}>
-        <NavBlock path='/login'>konto</NavBlock>
-        <NavBlock path='/offer'>oferta</NavBlock>
-        <NavBlock path='tel:+48123456789'>umów się</NavBlock>
-        <NavBlock path='/'>Home</NavBlock>
-      </Drawer>
+      <Drawer isDrawer={isDrawer}>{links}</Drawer>
 
-      <div className='hidden md:flex gap-3'>
-        <NavBlock path='/login'>konto</NavBlock>
-        <NavBlock path='/offer'>oferta</NavBlock>
-        <NavBlock path='tel:+48123456789'>umów się</NavBlock>
-        <NavBlock path='/'>Home</NavBlock>
-      </div>
+      <div className='hidden md:flex gap-3'>{links}</div>
     </nav>
   );
 };
@@ -73,7 +72,7 @@ interface NavBlockProps {
 const NavBlock = ({ children, path }: NavBlockProps) => {
   return (
     <Link href={path}>
-      <div className='bg-secondarymain-dark bg-opacity-70 text-left w-full px-4 py-2 rounded-sm dark:bg-lightBulb dark:text-white dark:bg-opacity-70 cursor-pointer md:bg-transparent md:text-center md:flex md:justify-center md:items-center md:focus:bg-secondarymain md:hover:bg-secondarymain md:hover:bg-opacity-10 md:focus:bg-opacity-10 md:text-2xl md:whitespace-nowrap'>
+      <div className='bg-contrast bg-opacity-70 text-left w-full px-6 py-2 rounded-sm dark:bg-lightBulb dark:text-white dark:bg-opacity-70 cursor-pointer md:bg-transparent md:text-center md:flex md:justify-center md:items-center md:focus:bg-secondarymain md:hover:bg-secondarymain md:hover:bg-opacity-25 md:focus:bg-opacity-25 md:text-2xl md:whitespace-nowrap'>
         {children}
       </div>
     </Link>
