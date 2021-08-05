@@ -17,7 +17,7 @@ import Link from 'next/link';
 const Register = () => {
   const router = useRouter();
 
-  const [register, { data }] = useRegisterMutation();
+  const [register] = useRegisterMutation();
   //placeholder for agreedments
   const checkBoxContent = {
     policyAgreement:
