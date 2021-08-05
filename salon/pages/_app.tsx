@@ -2,7 +2,7 @@ import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import ThemeToggler from '../components/ThemeToggler';
-import '../globals.css';
+import '../styles/globals.css';
 
 import NavBar from '../components/NavBar';
 import Script from 'next/script';
