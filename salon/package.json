@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
     "formik": "^2.2.9",
     "graphql": "^15.5.1",
     "next": "^11.0.1",
