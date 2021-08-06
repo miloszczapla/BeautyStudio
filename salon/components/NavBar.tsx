@@ -1,17 +1,26 @@
 import { icons } from '../helpclasses/getImageByKey';
 import Image from 'next/image';
 import Drawer from './Drawer';
-import React, { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import NavBlock from './NavBlock';
+import { MeContext } from '../helpclasses/contexts';
 
 //NavBar that is present on every site
 const NavBar = () => {
   const [isDrawer, setIsDrawer] = useState(false);
   const navRef = useRef(null);
 
-  const links = (
+  const me = useContext(MeContext);
+
+  const name = (
+    <div className='mx-3 flex justify-center items-center text-2xl text-white dark:text-secondarymain '>
+      {me?.name}
+    </div>
+  );
+
+  const linksBody = (
     <>
-      <NavBlock path='/login'>konto</NavBlock>
+      <NavBlock path={me ? '/logged' : '/login'}>konto</NavBlock>
       <NavBlock path='/offer'>oferta</NavBlock>
       <NavBlock path='tel:+48123456789'>umów się</NavBlock>
       <NavBlock path='/'>Home</NavBlock>
@@ -44,37 +53,26 @@ const NavBar = () => {
         className='pl-4 h-12'
       />
       {/* iconify icon  */}
-      <button
-        className='md:hidden'
-        type='button'
-        onClick={() => setIsDrawer((oldIsDrawer) => !oldIsDrawer)}
-      >
-        <span
-          className='iconify svg-icon text-black text-3xl'
-          data-inline='false'
-          data-icon={icons.hamburger}
-        ></span>
-      </button>
-      <Drawer isDrawer={isDrawer}>{links}</Drawer>
-
-      <div className='hidden md:flex gap-3'>{links}</div>
+      <div className='md:hidden flex'>
+        {name}
+        <button
+          type='button'
+          onClick={() => setIsDrawer((oldIsDrawer) => !oldIsDrawer)}
+        >
+          <span
+            className='iconify svg-icon text-black text-3xl'
+            data-inline='false'
+            data-icon={icons.hamburger}
+          ></span>
+        </button>
+      </div>
+      <Drawer isDrawer={isDrawer}> {linksBody}</Drawer>
+      <div className='hidden md:flex gap-3'>
+        {linksBody}
+        {name}
+      </div>
     </nav>
   );
 };
 
 export default NavBar;
-
-interface NavBlockProps {
-  path: string;
-  children: any;
-}
-
-const NavBlock = ({ children, path }: NavBlockProps) => {
-  return (
-    <Link href={path}>
-      <div className='bg-contrast bg-opacity-70 text-left w-full px-6 py-2 rounded-sm dark:bg-lightBulb dark:text-white dark:bg-opacity-70 cursor-pointer md:bg-transparent md:text-center md:flex md:justify-center md:items-center md:focus:bg-secondarymain md:hover:bg-secondarymain md:hover:bg-opacity-25 md:focus:bg-opacity-25 md:text-2xl md:whitespace-nowrap'>
-        {children}
-      </div>
-    </Link>
-  );
-};

@@ -5,6 +5,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
     './helpclasses/**/*.{js,ts,jsx,tsx}',
+    './generated/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',
   theme: {

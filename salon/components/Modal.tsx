@@ -10,8 +10,6 @@ interface Props {
 }
 
 const Modal = ({ setModal, payload }: Props) => {
-  console.log(payload.title, payload.price);
-
   return (
     <>
       <article

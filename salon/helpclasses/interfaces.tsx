@@ -4,3 +4,14 @@ export interface Payload {
   price: number;
   description: string;
 }
+
+export interface Me {
+  phone: string;
+  email: string;
+  name: string;
+  surName: string;
+  smsNotification: boolean;
+  emailNotification: boolean;
+  userImage: string;
+  note: string;
+}
