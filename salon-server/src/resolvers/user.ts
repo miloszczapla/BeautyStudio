@@ -13,6 +13,7 @@ import argon2 from 'argon2';
 import { User } from '../entities/User';
 import * as Emailvalidator from 'email-validator';
 import { parsePhoneNumber } from 'libphonenumber-js';
+// import { 'qid' } from 'src/constans';
 //Treatment resolver
 
 //type of args passing when registering
@@ -228,5 +229,21 @@ export class UserResolver {
     req.session.userId = user.id;
 
     return { user };
+  }
+
+  @Mutation(() => Boolean)
+  logout(@Ctx() { req, res }: MyContex) {
+    return new Promise((resolve) =>
+      req.session.destroy((err) => {
+        res.clearCookie('qid');
+        if (err) {
+          console.log('logout error', err);
+
+          resolve(false);
+          return;
+        }
+        resolve(true);
+      })
+    );
   }
 }
