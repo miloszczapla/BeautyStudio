@@ -1,59 +1,48 @@
 import { Form, Formik } from 'formik';
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import FormikField from '../components/FormikField';
 import Wrapper from '../components/Wrapper';
 import * as Yup from 'yup';
 import { MeContext } from '../helpclasses/contexts';
+import NoteField from '../components/NoteField';
+import SliderField from '../components/SliderField';
+import ImageDropZone from '../components/ImageDropZone';
+import { useLogoutMutation } from '../generated/graphql';
+import router from 'next/router';
 
-interface InitialValues {
-  name: string | undefined;
-  surName: string | undefined;
-  email: string | undefined;
-  phone: string | undefined;
-  note: string | undefined;
-  smsNotification: boolean | undefined;
-  emailNotification: boolean | undefined;
-  userImage: string | undefined;
-}
+// interface InitialValues {
+//   name: string | undefined;
+//   surName: string | undefined;
+//   email: string | undefined;
+//   phone: string | undefined;
+//   note: string | undefined;
+//   smsNotification: boolean | undefined;
+//   emailNotification: boolean | undefined;
+//   userImage: string | undefined;
+// }
 
 const Logged = () => {
   const [isEditable, setIsEditable] = useState(false);
   const me = useContext(MeContext);
   console.log('logged me: ', me);
 
-  const [initialValues, setinitialValues] = useState<InitialValues>({
-    name: me?.name,
-    surName: me?.surName,
-    email: me?.email,
-    phone: me?.surName,
-    note: me?.note,
-    smsNotification: me?.smsNotification,
-    emailNotification: me?.emailNotification,
-    userImage: me?.userImage,
-  });
+  const [logout] = useLogoutMutation();
 
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setData(me.data?.me);
-  //     setinitialValues({
-  //       name: data?.name,
-  //       surName: data?.surName,
-  //       email: data?.email,
-  //       phone: data?.phone,
-  //       note: data?.note,
-  //       smsNotification: data?.smsNotification,
-  //       emailNotification: data?.emailNotification,
-  //       userImage: data?.userImage,
-  //     });
-  //   }, 100);
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [me]);
-  // useEffect(async () => {
-  //  const response = await me
-  // }, [])
-  // const router = useRouter();
+  // const [initialValues, setinitialValues] = useState<InitialValues>({
+  //   name: me?.name,
+  //   surName: me?.surName,
+  //   email: me?.email,
+  //   phone: me?.phone,
+  //   note: me?.note,
+  //   smsNotification: me?.smsNotification,
+  //   emailNotification: me?.emailNotification,
+  //   userImage: me?.userImage,
+  // });
+
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
 
   return (
     <Wrapper>
@@ -61,13 +50,13 @@ const Logged = () => {
         <Formik
           initialValues={{
             name: me.name,
-            surName: me?.surName,
-            email: me?.email,
-            phone: me?.surName,
-            note: me?.note,
-            smsNotification: me?.smsNotification,
-            emailNotification: me?.emailNotification,
-            userImage: me?.userImage,
+            surName: me.surName,
+            email: me.email,
+            phone: me.phone,
+            note: me.note,
+            smsNotification: me.smsNotification,
+            emailNotification: me.emailNotification,
+            userImage: me.userImage,
           }}
           onSubmit={
             () => {}
@@ -95,30 +84,77 @@ const Logged = () => {
           render={(formProps) => {
             return (
               <Form className=' flex flex-col gap-5 text-xs'>
+                <ImageDropZone isEditable={isEditable} />
+                {/* {TODO: add user image section} */}
+                <FormikField
+                  name='name'
+                  placeholder='Adam'
+                  formProps={formProps}
+                  isEditable={isEditable}
+                />
+                <FormikField
+                  name='surName'
+                  placeholder='Nowak'
+                  formProps={formProps}
+                  isEditable={isEditable}
+                />
                 <FormikField
                   name='email'
                   placeholder='login@poczta.com'
                   formProps={formProps}
+                  isEditable={isEditable}
                 />
-
+                <NoteField
+                  name='note'
+                  formProps={formProps}
+                  isEditable={isEditable}
+                  label='Notka:'
+                  placeholder='Stresuje się, nie lubie rozmaiwac podczas zabiegu...'
+                />
+                <div className='flex justify-center items-center text-3xl'>
+                  <h2>Przypomnienie</h2>
+                </div>
+                <div className='flex justify-around relative'>
+                  <SliderField
+                    name='smsNotification'
+                    isEditable={isEditable}
+                    label='SMS'
+                  />
+                  <SliderField
+                    name='emailNotification'
+                    isEditable={isEditable}
+                    label='email'
+                  />
+                </div>
                 {isEditable ? (
                   <button
                     type='submit'
                     className='submit-btn'
-                    onClick={() => setIsEditable(true)}
+                    onClick={() => setIsEditable(false)}
                     // onClick={() => console.log('wartości pól', formProps.values)}
                   >
-                    edytuj
+                    zapisz
                   </button>
                 ) : (
                   <button
-                    type='submit'
+                    type='button'
                     className='submit-btn'
-                    // onClick={() => console.log('wartości pól', formProps.values)}
+                    onClick={() => {
+                      setIsEditable(true);
+                      console.log('wartości pól', formProps.values);
+                    }}
                   >
                     edytuj
                   </button>
                 )}
+
+                {/* logout button */}
+                <p
+                  onClick={handleLogout}
+                  className='text-xl text-contrast underline cursor-pointer px-3 my-3'
+                >
+                  Wyloguj się
+                </p>
               </Form>
             );
           }}

@@ -7,12 +7,11 @@ interface Props {
   placeholder: string;
   label?: string;
   formProps: any;
-  isEditable?: boolean;
+  isEditable: boolean;
 }
 
-const FormikField = ({
+const NoteField = ({
   name,
-  type = 'text',
   placeholder,
   formProps,
   label,
@@ -29,7 +28,7 @@ const FormikField = ({
       {label && (
         <label
           htmlFor={name}
-          className='text-black first-letter-capitalize dark:text-white text-xl'
+          className='text-primarymain first-letter-capitalize dark:text-white text-xl'
         >
           {label}
         </label>
@@ -38,9 +37,10 @@ const FormikField = ({
       <Field
         id={name}
         name={name}
-        type={type}
+        type='text'
         placeholder={placeholder}
-        className={`px-2 text-2xl text-primarymain border-b  focus:outline-none  border-primarymain focus:shadow-dark dark:bg-secondarymain-dark  ${getStyles(
+        component='textarea'
+        className={`px-2 text-lg h-40   focus:outline-none  shadow-dark focus:shadow-main dark:bg-secondarymain-dark  ${getStyles(
           formProps.errors,
           name
         )}`}
@@ -57,4 +57,4 @@ const FormikField = ({
   );
 };
 
-export default FormikField;
+export default NoteField;

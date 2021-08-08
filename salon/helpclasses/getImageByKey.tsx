@@ -3,6 +3,7 @@ import landingImg from '../assets/landingImg.png';
 import Loading from '../assets/LOADING.png';
 
 import hairicon from '../assets/hairicon.svg';
+import profilImg from '../assets/PROFIL.svg';
 
 export const images = {
   landingImg,
@@ -12,6 +13,7 @@ export const images = {
 
 export const icons = {
   hairicon,
+  profilImg,
   account: 'mdi:account',
   offer: 'ic:twotone-local-offer',
   signup: 'mdi:account-edit',

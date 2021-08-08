@@ -32,6 +32,7 @@ export type Mutation = {
   deleteTreatment: Scalars['Boolean'];
   register: UserResponce;
   login: UserResponce;
+  logout: Scalars['Boolean'];
 };
 
 
@@ -104,6 +105,7 @@ export type User = {
   policyAgreement: Scalars['Boolean'];
   advertisingAgreement: Scalars['Boolean'];
   note: Scalars['String'];
+  specialistNote: Scalars['String'];
 };
 
 export type UserResponce = {
@@ -111,6 +113,11 @@ export type UserResponce = {
   errors?: Maybe<Array<FieldError>>;
   user?: Maybe<User>;
 };
+
+export type RegularUserFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'id' | 'email' | 'name' | 'surName' | 'phone' | 'smsNotification' | 'userImage'>
+);
 
 export type LoginMutationVariables = Exact<{
   login: Scalars['String'];
@@ -127,9 +134,17 @@ export type LoginMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'phone' | 'email' | 'surName' | 'name'>
+      & RegularUserFragment
     )> }
   ) }
+);
+
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'logout'>
 );
 
 export type RegisterMutationVariables = Exact<{
@@ -151,7 +166,7 @@ export type RegisterMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'createdAt' | 'updatedAt' | 'email' | 'name' | 'surName' | 'phone' | 'smsNotification' | 'userImage'>
+      & RegularUserFragment
     )> }
   ) }
 );
@@ -167,7 +182,17 @@ export type MeQuery = (
   )> }
 );
 
-
+export const RegularUserFragmentDoc = gql`
+    fragment RegularUser on User {
+  id
+  email
+  name
+  surName
+  phone
+  smsNotification
+  userImage
+}
+    `;
 export const LoginDocument = gql`
     mutation Login($login: String!, $password: String!) {
   login(options: {login: $login, password: $password}) {
@@ -176,14 +201,11 @@ export const LoginDocument = gql`
       message
     }
     user {
-      phone
-      email
-      surName
-      name
+      ...RegularUser
     }
   }
 }
-    `;
+    ${RegularUserFragmentDoc}`;
 export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
 
 /**
@@ -211,6 +233,36 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout
+}
+    `;
+export type LogoutMutationFn = Apollo.MutationFunction<LogoutMutation, LogoutMutationVariables>;
+
+/**
+ * __useLogoutMutation__
+ *
+ * To run a mutation, you first call `useLogoutMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLogoutMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [logoutMutation, { data, loading, error }] = useLogoutMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<LogoutMutation, LogoutMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument, options);
+      }
+export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
+export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
+export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
 export const RegisterDocument = gql`
     mutation Register($name: String!, $password: String!, $email: String!, $phone: String!, $policyAgreement: Boolean!, $advertisingAgreement: Boolean!) {
   register(
@@ -221,19 +273,11 @@ export const RegisterDocument = gql`
       message
     }
     user {
-      id
-      createdAt
-      updatedAt
-      email
-      name
-      surName
-      phone
-      smsNotification
-      userImage
+      ...RegularUser
     }
   }
 }
-    `;
+    ${RegularUserFragmentDoc}`;
 export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
 
 /**
