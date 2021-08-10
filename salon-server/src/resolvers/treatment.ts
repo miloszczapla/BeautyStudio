@@ -25,9 +25,12 @@ export class TreatmentResolver {
   @Mutation(() => Treatment)
   async createTreatment(
     @Arg('title') title: string,
+    @Arg('section') section: string,
+    @Arg('description') description: string,
+    @Arg('price') price: number,
     @Ctx() { em }: MyContex
   ): Promise<Treatment> {
-    const post = em.create(Treatment, { title });
+    const post = em.create(Treatment, { title, section, description, price });
     await em.persistAndFlush(post);
     return post;
   }
@@ -37,6 +40,9 @@ export class TreatmentResolver {
   async updateTreatment(
     @Arg('id') id: number,
     @Arg('title', () => String, { nullable: true }) title: string,
+    @Arg('section', () => String, { nullable: true }) section: string,
+    @Arg('description', () => String, { nullable: true }) description: string,
+    @Arg('price', () => Number, { nullable: true }) price: number,
 
     @Ctx() { em }: MyContex
   ): Promise<Treatment | null> {
@@ -49,8 +55,17 @@ export class TreatmentResolver {
 
     if (typeof title !== 'undefined') {
       post.title = title;
-      await em.persistAndFlush(post);
     }
+    if (typeof section !== 'undefined') {
+      post.section = section;
+    }
+    if (typeof description !== 'undefined') {
+      post.description = description;
+    }
+    if (typeof price !== 'undefined') {
+      post.price = price;
+    }
+    await em.persistAndFlush(post);
     return post;
   }
 

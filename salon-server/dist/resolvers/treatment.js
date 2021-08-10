@@ -31,14 +31,14 @@ let TreatmentResolver = class TreatmentResolver {
     treatment(id, { em }) {
         return em.findOne(Treatment_1.Treatment, { id });
     }
-    createTreatment(title, { em }) {
+    createTreatment(title, section, description, price, { em }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const post = em.create(Treatment_1.Treatment, { title });
+            const post = em.create(Treatment_1.Treatment, { title, section, description, price });
             yield em.persistAndFlush(post);
             return post;
         });
     }
-    updateTreatment(id, title, { em }) {
+    updateTreatment(id, title, section, description, price, { em }) {
         return __awaiter(this, void 0, void 0, function* () {
             const post = yield em.findOne(Treatment_1.Treatment, { id });
             if (!post) {
@@ -46,8 +46,17 @@ let TreatmentResolver = class TreatmentResolver {
             }
             if (typeof title !== 'undefined') {
                 post.title = title;
-                yield em.persistAndFlush(post);
             }
+            if (typeof section !== 'undefined') {
+                post.section = section;
+            }
+            if (typeof description !== 'undefined') {
+                post.description = description;
+            }
+            if (typeof price !== 'undefined') {
+                post.price = price;
+            }
+            yield em.persistAndFlush(post);
             return post;
         });
     }
@@ -81,18 +90,24 @@ __decorate([
 __decorate([
     type_graphql_1.Mutation(() => Treatment_1.Treatment),
     __param(0, type_graphql_1.Arg('title')),
-    __param(1, type_graphql_1.Ctx()),
+    __param(1, type_graphql_1.Arg('section')),
+    __param(2, type_graphql_1.Arg('description')),
+    __param(3, type_graphql_1.Arg('price')),
+    __param(4, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, String, String, Number, Object]),
     __metadata("design:returntype", Promise)
 ], TreatmentResolver.prototype, "createTreatment", null);
 __decorate([
     type_graphql_1.Mutation(() => Treatment_1.Treatment, { nullable: true }),
     __param(0, type_graphql_1.Arg('id')),
     __param(1, type_graphql_1.Arg('title', () => String, { nullable: true })),
-    __param(2, type_graphql_1.Ctx()),
+    __param(2, type_graphql_1.Arg('section', () => String, { nullable: true })),
+    __param(3, type_graphql_1.Arg('description', () => String, { nullable: true })),
+    __param(4, type_graphql_1.Arg('price', () => Number, { nullable: true })),
+    __param(5, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, String, Object]),
+    __metadata("design:paramtypes", [Number, String, String, String, Number, Object]),
     __metadata("design:returntype", Promise)
 ], TreatmentResolver.prototype, "updateTreatment", null);
 __decorate([

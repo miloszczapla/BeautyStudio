@@ -24,4 +24,16 @@ export class Treatment {
   @Field()
   @Property({ type: 'text' })
   title!: string;
+
+  @Field()
+  @Property({ type: 'text' })
+  section!: string;
+
+  @Field()
+  @Property({ type: 'text' })
+  description!: string;
+
+  @Field()
+  @Property({ type: 'number' })
+  price!: number;
 }

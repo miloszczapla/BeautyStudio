@@ -36,11 +36,17 @@ export type Mutation = {
 
 
 export type MutationCreateTreatmentArgs = {
+  price: Scalars['Float'];
+  description: Scalars['String'];
+  section: Scalars['String'];
   title: Scalars['String'];
 };
 
 
 export type MutationUpdateTreatmentArgs = {
+  price?: Maybe<Scalars['Float']>;
+  description?: Maybe<Scalars['String']>;
+  section?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   id: Scalars['Float'];
 };
@@ -87,6 +93,9 @@ export type Treatment = {
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
   title: Scalars['String'];
+  section: Scalars['String'];
+  description: Scalars['String'];
+  price: Scalars['Float'];
 };
 
 export type User = {
@@ -104,6 +113,7 @@ export type User = {
   policyAgreement: Scalars['Boolean'];
   advertisingAgreement: Scalars['Boolean'];
   note: Scalars['String'];
+  specialistNote: Scalars['String'];
 };
 
 export type UserResponce = {
@@ -164,6 +174,17 @@ export type MeQuery = (
   & { me?: Maybe<(
     { __typename?: 'User' }
     & Pick<User, 'phone' | 'email' | 'name' | 'surName' | 'smsNotification' | 'emailNotification' | 'userImage' | 'note'>
+  )> }
+);
+
+export type TreatmentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TreatmentsQuery = (
+  { __typename?: 'Query' }
+  & { treatments: Array<(
+    { __typename?: 'Treatment' }
+    & Pick<Treatment, 'id' | 'title' | 'section' | 'description' | 'price'>
   )> }
 );
 
@@ -306,3 +327,41 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const TreatmentsDocument = gql`
+    query Treatments {
+  treatments {
+    id
+    title
+    section
+    description
+    price
+  }
+}
+    `;
+
+/**
+ * __useTreatmentsQuery__
+ *
+ * To run a query within a React component, call `useTreatmentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTreatmentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTreatmentsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTreatmentsQuery(baseOptions?: Apollo.QueryHookOptions<TreatmentsQuery, TreatmentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TreatmentsQuery, TreatmentsQueryVariables>(TreatmentsDocument, options);
+      }
+export function useTreatmentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TreatmentsQuery, TreatmentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TreatmentsQuery, TreatmentsQueryVariables>(TreatmentsDocument, options);
+        }
+export type TreatmentsQueryHookResult = ReturnType<typeof useTreatmentsQuery>;
+export type TreatmentsLazyQueryHookResult = ReturnType<typeof useTreatmentsLazyQuery>;
+export type TreatmentsQueryResult = Apollo.QueryResult<TreatmentsQuery, TreatmentsQueryVariables>;

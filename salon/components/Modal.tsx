@@ -15,12 +15,12 @@ const Modal = ({ setModal, payload }: Props) => {
   return (
     <>
       <article
-        className='fixed inset-0 bg-modal dark:bg-modal-dark z-50 flex  justify-center items-center '
+        className='fixed inset-0 bg-modal dark:bg-modal-dark z-40 flex  justify-center items-center '
         onClick={() => setModal(false)}
       ></article>
-      <div className=' absolute left-1/2 z-50'>
-        <div className=' relative -left-1/2 '>
-          <div className='modal-content bg-white dark:bg-primaryvariant-dark shadow-main max-w-sm p-4 rounded-lg z-50'>
+      <div className=' absolute left-1/2 '>
+        <div className=' relative -left-1/2 z-50'>
+          <div className='modal-content bg-white dark:bg-primaryvariant-dark shadow-main max-w-sm p-4 rounded-lg '>
             <Label {...payload} />
             <p className='text-black dark:text-darktext p-2 text-lg'>
               {payload.description}

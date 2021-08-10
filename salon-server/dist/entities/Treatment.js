@@ -38,6 +38,21 @@ __decorate([
     core_1.Property({ type: 'text' }),
     __metadata("design:type", String)
 ], Treatment.prototype, "title", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'text' }),
+    __metadata("design:type", String)
+], Treatment.prototype, "section", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'text' }),
+    __metadata("design:type", String)
+], Treatment.prototype, "description", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    core_1.Property({ type: 'number' }),
+    __metadata("design:type", Number)
+], Treatment.prototype, "price", void 0);
 Treatment = __decorate([
     type_graphql_1.ObjectType(),
     core_1.Entity()

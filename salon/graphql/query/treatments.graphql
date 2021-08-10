@@ -1,0 +1,9 @@
+query Treatments {
+  treatments {
+    id
+    title
+    section
+    description
+    price
+  }
+}
